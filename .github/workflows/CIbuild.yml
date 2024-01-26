@@ -4,15 +4,15 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'client/**'
-      - 'server/**'
+
 
 jobs:
   frontend:
     name: Frontend Build and Push
     runs-on: ubuntu-latest
-    if: "contains(toJson(github.event.commits.*.added), 'client/**') || contains(toJson(github.event.commits.*.modified), 'client/**')"
+    if: >
+      contains(toJson(github.event.commits.*.added), 'client/') ||
+      contains(toJson(github.event.commits.*.modified), 'client/')
 
     steps:
       - name: Checkout Repository
