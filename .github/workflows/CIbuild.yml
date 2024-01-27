@@ -10,9 +10,7 @@ jobs:
   frontend:
     name: Frontend Build and Push
     runs-on: ubuntu-latest
-    if: >
-      contains(toJson(github.event.commits.*.added), 'client/') ||
-      contains(toJson(github.event.commits.*.modified), 'client/')
+
 
     steps:
       - name: Checkout Repository
@@ -47,7 +45,6 @@ jobs:
   backend:
     name: Backend Build and Push
     runs-on: ubuntu-latest
-    if: "contains(toJson(github.event.commits.*.added), 'server/**') || contains(toJson(github.event.commits.*.modified), 'server/**')"
 
     steps:
       - name: Checkout Repository
