@@ -19,8 +19,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Run if changes in client directory
         run: |
-          docker build -t ehtishamasghar13/frontend:latest client/
-          docker push ehtishamasghar13/frontend:latest
+          docker compose build frontend
+          docker compose push frontend
 
 
 
