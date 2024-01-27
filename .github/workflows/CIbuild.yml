@@ -14,9 +14,10 @@ jobs:
         id: changes
         with:
           filters: |
-            src:
-              - 'client/**'
-              - 'server/**'
+            client:
+                - 'client/**'
+            server:
+                - 'server/**'
 
       - name: Check out repository
         uses: actions/checkout@v2
