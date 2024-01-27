@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "client/**"
-      - "server/**"
+      - 'client/**'
+      - 'server/**'
 
 jobs:
   build:
@@ -26,13 +26,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       
       - name: Build and Push Docker Image if changes in client directory
-        if: ${{ contains(github.event_paths, 'client/') }}        
+        if: ${{ contains(github.event_paths, 'client/**') }}        
         run: |
           docker build -t ehtishamasghar13/frontend:latest client/
           docker push ehtishamasghar13/frontend:latest
 
       - name: Build and Push Docker Image if changes in server directory
-        if: ${{ contains(github.event_paths, 'server/') }}
+        if: ${{ contains(github.event_paths, 'server/**') }}
         run: |
           docker build -t ehtishamasghar13/backend:latest server/
           docker push ehtishamasghar13/backend:latest
