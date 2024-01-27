@@ -17,5 +17,5 @@ EXPOSE 8080
 ENTRYPOINT ["todo"]
 USER 1001
 
-# stage - dev
+# stage - dev change
 # TODO - hot-reload (go run main.go)
