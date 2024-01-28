@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
+  name: frontend
 spec:
-  replicas: 2
+  replicas: 2  #FRONTEND_REPLICA_COUNT in .env
   selector:
     matchLabels:
       app: frontend
@@ -13,30 +13,11 @@ spec:
         app: frontend
     spec:
       containers:
-        - name: frontend
-          image: ehtishamasghar13/go-to-do-frontend:rc
-          ports:
-            - containerPort: 8080
-          envFrom:
-            - configMapRef:
-                name: frontend-configmap
-          env:
-            - name: REACT_APP_API_ENDPOINT
-              valueFrom:
-                secretKeyRef:
-                  name: frontend-secrets
-                  key: REACT_APP_API_ENDPOINT
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service
-spec:
-  selector:
-    app: frontend
-  type: NodePort  # Changed to NodePort service type
-  ports:
-    - protocol: TCP
-      port: 8081
-      targetPort: 8080
-      nodePort: 31000
+      - name: frontend
+        image: ehtishamasghar13/go-to-do-frontend:rc
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: todo-app-config
+

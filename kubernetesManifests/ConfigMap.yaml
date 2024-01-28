@@ -1,26 +1,18 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: frontend-configmap
+  name: todo-app-config
 data:
-  REACT_APP_API_ENDPOINT: http://localhost:8080
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: api-configmap
-data:
-  DB_CONNECTION: mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:27017/${DB_NAME}
-  DB_NAME: ${DB_NAME}
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: db-configmap
-data:
-  MONGODB_ROOT_PASSWORD: ${DB_ROOT_PASS}
-  MONGODB_DATABASE: ${DB_NAME}
-  MONGODB_USERNAME: ${DB_USER}
-  MONGODB_PASSWORD: ${DB_PASS}
+  COMPOSE_PROJECT_NAME: "todo-app"
+  COMPOSE_FILE: "docker-compose.yaml"
+  REACT_APP_API_ENDPOINT: "http://localhost:8080"
+  DB_HOST: "mongodb"
+  DB_NAME: "test"
+  DB_USER: "appuser"
+  DB_IMAGE_TAG: "4.4.1"
+  DB_STORAGE_SIZE: "1Gi"
+  DB_REPLICA_COUNT: "1"
+  FRONTEND_REPLICA_COUNT: "2"
+  FRONTEND_INGRESS_HOST: "todo.docker.internal"
+  API_REPLICA_COUNT: "2"
+  API_INGRESS_HOST: "todo-api.docker.internal"

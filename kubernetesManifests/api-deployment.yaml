@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-deployment
+  name: api
 spec:
-  replicas: 2
+  replicas: 2  # API_REPLICA_COUNT in .env
   selector:
     matchLabels:
       app: api
@@ -13,28 +13,16 @@ spec:
         app: api
     spec:
       containers:
-        - name: api
-          image: ehtishamasghar13/go-to-do-api:rc
-          ports:
-            - containerPort: 8080
-          envFrom:
-            - configMapRef:
-                name: api-configmap
-          env:
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: api-secrets
-                  key: DB_PASSWORD
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: api-service
-spec:
-  selector:
-    app: api
-  ports:
-    - protocol: TCP
-      port: 8080
+      - name: api
+        image: ehtishamasghar13/go-to-do-api:rc
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: todo-app-config
+        - secretRef:
+            name: todo-app-secret
+        env:
+        - name: DB_CONNECTION
+          #value: "mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:27017/${DB_NAME}"
+          value: "mongodb://mongodb:27017/test" # if you are using on local give ip kubectl get svc 

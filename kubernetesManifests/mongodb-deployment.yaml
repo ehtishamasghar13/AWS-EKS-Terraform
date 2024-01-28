@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+spec:
+  serviceName: "mongodb"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: bitnami/mongodb:4.4.1
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGODB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: todo-app-secret
+              key: MONGODB_ROOT_PASSWORD
+        - name: MONGODB_USERNAME
+          value: "appuser"
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: todo-app-secret
+              key: MONGODB_PASSWORD
+        - name: MONGODB_DATABASE
+          value: "test"
