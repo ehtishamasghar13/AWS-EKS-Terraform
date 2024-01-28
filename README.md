@@ -16,5 +16,10 @@ This a 3 tier **To-Do List** application,  where:
 
 # 2. Create Kubernetes Manifests from docker-compose.yaml file
 
-- I create secret.yaml file to  
+- I create secret.yaml and Configfile for application envs. 
 - I create Deployments with their Service of Frontend, API and Database.
+
+# 3. Create Terraform script to deploy EKS cluster
+- Create S3 bucket to store the Statefile.
+- I create VPC using VPC module in Terraform
+- Then I create EKS cluster in private subnet of created VPC using Terraform.
