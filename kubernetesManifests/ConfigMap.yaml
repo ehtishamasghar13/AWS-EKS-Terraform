@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-configmap
+data:
+  REACT_APP_API_ENDPOINT: http://localhost:8080
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-configmap
+data:
+  DB_CONNECTION: mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:27017/${DB_NAME}
+  DB_NAME: ${DB_NAME}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-configmap
+data:
+  MONGODB_ROOT_PASSWORD: ${DB_ROOT_PASS}
+  MONGODB_DATABASE: ${DB_NAME}
+  MONGODB_USERNAME: ${DB_USER}
+  MONGODB_PASSWORD: ${DB_PASS}

@@ -16,7 +16,7 @@ services:
     image: ehtishamasghar13/go-to-do-frontend:rc
   # in k8s, it will be easier using sidecar with emptyDir vol
   frontend-sidecar-env-gen:
-    image: ehtishamasghar13/dotenv-to-js-object:4ea
+    image: abdennour/dotenv-to-js-object:4ea
     working_dir: /data
     volumes:
     - env-js:/data 
